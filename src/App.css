@@ -1,0 +1,124 @@
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --shadow-primary: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --accent-blue: #00c6ff;
+  --accent-green: #0072ff;
+  --text-secondary: #aaa;
+}
+
+/* ===== 全局 ===== */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #0f0c29; /* fallback */
+  background: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
+  color: #fff;
+}
+
+/* ===== 容器 ===== */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 动态背景 */
+.dynamic-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(0, 114, 255, 0.15), transparent 40%),
+  radial-gradient(circle at 90% 80%, rgba(0, 198, 255, 0.15), transparent 40%);
+  animation: pulse 20s infinite alternate;
+}
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+/* ===== 顶部栏 ===== */
+.app-header {
+  position: relative;
+  z-index: 100;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-primary);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo 渐变文字 */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* ===== 主体 ===== */
+.main-content {
+  flex: 1;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ===== 图形容器 ===== */
+.graph-container {
+  flex: 1;
+  position: relative;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+.graph-container[data-sidebar-open='true'] {
+  margin-left: 300px;
+}
+
+/* ===== 加载遮罩 ===== */
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(26, 26, 46, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-box {
+  text-align: center;
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--glass-border);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loading-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
